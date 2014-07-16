@@ -83,7 +83,9 @@ module.exports = function(port) {
                 }
             }
         }
-        error.apply(this, arguments);
+        if (typeof error === 'function') {
+            error.apply(this, arguments);
+        }
     });
 
     return server.listen(port);
