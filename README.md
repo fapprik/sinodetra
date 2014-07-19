@@ -60,6 +60,8 @@ And—last but not least—there’s a way to define a callback if no routes mat
 
 ## Changelog
 
+* 0.0.2
+	* Fix error callback
 * 0.0.1
 	* Initial version
 
