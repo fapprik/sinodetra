@@ -4,7 +4,7 @@
 * Sinodetra
 * https://github.com/fapprik/sinodetra
 *
-* Copyright (c) 2014 fapprik <hello@fapprik.com>
+* Copyright (c) 2015 fapprik <hello@fapprik.com>
 * Licensed under the MIT license.
 * https://github.com/fapprik/sinodetra/blob/master/LICENSE
 */
@@ -16,8 +16,10 @@ module.exports = function(port) {
     var routes = { };
     var error;
     var http = require('http');
+    var url = require('url');
+    var queryString = require('querystring');
     var server = http.createServer();
-    var parse = require('url').parse;
+    var parse = url.parse;
     var placeholders = /(:\w+)/gi;
 
     ['GET', 'POST', 'PUT', 'DELETE'].forEach(function(method) {
@@ -78,7 +80,25 @@ module.exports = function(port) {
                         args.push(match);
                     });
                     var handle = routes[request.method][route];
-                    handle.apply(this, args);
+                    request.body = '';
+                    request.on('data', function(data) {
+                        request.body += data;
+                    });
+                    request.params = url.parse(request.url, true).query || {};
+                    request.param = function(key) {
+                        return key in request.params ? request.params[key] : false;
+                    };
+                    request.on('end', function() {
+                        try {
+                            request.body = JSON.parse(request.body);
+                        } catch (e) {
+                            var query = queryString.parse(request.body) || {};
+                            for (var attr in query) {
+                                request.params[attr] = query[attr];
+                            }
+                        }
+                        handle.apply(this, args);
+                    });
                     return;
                 }
             }

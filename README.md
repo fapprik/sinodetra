@@ -40,6 +40,33 @@ And—last but not least—there’s a way to define a callback if no routes mat
 		response.plain('404 Not Found');
 	});
 
+## Parameters
+
+When you’re building applications using Sinodetra, you’ll need to get information from your users. Kindly, grabbing data from the request is an easy enough process. You can access all parameters by using the `request.params` object.
+
+	app.get('/test', function(request, response) {
+		response.plain('ID = ' + request.params.id);
+	});
+
+Alternatively, you can use the provided `request.param` method, which returns the parameter in case it was provided or `false` otherwise.
+
+	app.get('/test', function(request, response) {
+		response.plain('ID = ' + request.param('id'));
+	});
+
+Sinodetra will try to detect what kind of data was sent within a request. If it’s JSON, `request.body` will be the parsed JSON object. Otherwise, Sinodetra assumes that the information was passed as `application/x-www-form-urlencoded` and parse the query string.
+
+Assuming you execute a `POST` request containing `demo=Lorem&id=Ipsum` to `/test?id=123`, Sinodetra will merge those parameters, using `GET` parameters as the base and overwriting existing keys with the data from the original methods. Thus, the previous example would result the following `request.params` object.
+
+```json
+{
+    "demo": "Lorem"
+    "id": "Ipsum"
+}
+```
+
+Please note that Sinodetra has no nice way to handle file uploads (yet!).
+
 ## Examples
 
 	app.get('/', function(request, response) {
@@ -60,6 +87,8 @@ And—last but not least—there’s a way to define a callback if no routes mat
 
 ## Changelog
 
+* 0.0.3
+	* Add parameter support
 * 0.0.2
 	* Fix error callback
 * 0.0.1
@@ -72,7 +101,7 @@ And—last but not least—there’s a way to define a callback if no routes mat
 
 ## License
 
-Copyright (c) 2014 [fapprik](http://fapprik.com/)  
+Copyright (c) 2015 [fapprik](http://fapprik.com/)  
 Licensed under the MIT license.
 
 See LICENSE for more info.

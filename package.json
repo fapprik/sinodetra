@@ -1,6 +1,6 @@
 {
   "name": "sinodetra",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Minimal Sinatra like router for node.js",
   "main": "index.js",
   "scripts": {
