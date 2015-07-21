@@ -60,7 +60,7 @@ Assuming you execute a `POST` request containing `demo=Lorem&id=Ipsum` to `/test
 
 ```json
 {
-    "demo": "Lorem"
+    "demo": "Lorem",
     "id": "Ipsum"
 }
 ```
