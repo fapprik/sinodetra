@@ -30,7 +30,7 @@ As you can see, you can also use regular expressions within your route definitio
 
 In addition, Sinodetra extends node’s HTTP `ServerResponse` by providing `html`, `plain`, and `json` methods. These methods are actually shortcuts for the likewise provided `send` method, which allows you to customize the HTTP content type and status code for your response.
 
-	response.send('Hello World', 'text/html', 200);
+	response.send('Hello World', 200, 'text/html');
 
 Using `response.send()` you can set the HTTP content type and status code to whatever you need.
 
