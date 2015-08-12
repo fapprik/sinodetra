@@ -87,6 +87,8 @@ Please note that Sinodetra has no nice way to handle file uploads (yet!).
 
 ## Changelog
 
+* 0.0.4
+	* Fix README
 * 0.0.3
 	* Add parameter support
 * 0.0.2
@@ -105,3 +107,8 @@ Copyright (c) 2015 [fapprik](http://fapprik.com/)
 Licensed under the MIT license.
 
 See LICENSE for more info.
+
+## Contributors
+
+- [@rasshofer](https://github.com/rasshofer)
+- [@paulcockrell](https://github.com/paulcockrell)
