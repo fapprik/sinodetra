@@ -40,7 +40,7 @@ module.exports = function(port) {
         error = callback;
     };
 
-    http.ServerResponse.prototype.send = function(message, code, type) {
+    http.ServerResponse.prototype.send = function(message, type, code) {
         code = code || 200;
         type = type || 'text/html';
         if (typeof message === 'object') {
@@ -67,7 +67,7 @@ module.exports = function(port) {
         }
         this.send(message, 'application/json', code);
     };
-
+    
     server.on('request', function(request, response) {
         var pathname = parse(request.url).pathname;
         if (typeof routes[request.method] === 'object') {
